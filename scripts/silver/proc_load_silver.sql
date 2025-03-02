@@ -23,12 +23,12 @@ AS
 BEGIN
 	DECLARE @start_time DATETIME,
             @end_time DATETIME,
-            @bronze_start DATETIME,
-            @bronze_end DATETIME;
+            @batch_start DATETIME,
+            @batch_end DATETIME;
 
 	
 	BEGIN TRY
-		SET @bronze_start = GETDATE();  
+		SET @batch_start = GETDATE();  
         PRINT '=====================================================';
         PRINT 'Loading Silverlayer';
         PRINT '=====================================================';
@@ -252,6 +252,11 @@ BEGIN
 		SET @end_time = GETDATE();
 		PRINT '=====================================================';
 		PRINT '>> Load Duration: ' + CAST(DATEDIFF(SECOND, @start_time, @end_time) AS NVARCHAR(10)) + ' seconds';
+		PRINT '=====================================================';
+
+		SET @batch_start = GETDATE();  
+		PRINT '=====================================================';
+		PRINT '>> Load Duration: ' + CAST(DATEDIFF(SECOND, @batch_start, @batch_end) AS NVARCHAR(10)) + ' seconds';
 		PRINT '=====================================================';
 	END TRY
 	BEGIN CATCH
